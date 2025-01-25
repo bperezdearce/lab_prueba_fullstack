@@ -38,21 +38,7 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - pokemon-network
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pokemon-pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: barbara.perezdearce@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "8000:80" 
-    networks:
-      - pokemon-network
-    depends_on:
-      - postgres      
-      
+      - pokemon-network      
     
 volumes:
   postgres-data:
@@ -61,4 +47,3 @@ volumes:
 networks:
   pokemon-network:
     driver: bridge
-
