@@ -4,6 +4,6 @@ import { getAllSetsController, getSetCardsController } from "../controllers/sets
 const setsRouter: Router = Router();
 
 setsRouter.get("/", getAllSetsController);
-setsRouter.get("/:id/cards", getSetCardsController);
+setsRouter.get("/:id", getSetCardsController);
 
 export default setsRouter;

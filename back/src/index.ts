@@ -8,4 +8,6 @@ AppDataSource.initialize()
     console.log("Database connected");
     server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch((error) => console.error(error));
+  .catch((error: any) => {
+    console.error("Error al inicializar la base de datos:", error);
+  });
