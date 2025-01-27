@@ -2,13 +2,10 @@
 
 ### Pokemon TCG
 
-#### Tecnologías Backend
+#### Herramientas y Tecnologías
+- **Backend**: Node.js, Express
 - **Base de Datos**: PostgreSQL
-- **Lenguaje de Programación**: TypeScript
-- **Entorno de Desarrollo**: Node.js
-- **Otros**: Docker 
-
-#### Tecnologías Frontend
-- **Lenguaje de Programación**: TypeScript
-- **Framework**: Nextjs
-- **Estilos**: TailwindCSS
+- **Frontend**: Next.js, TailwindCSS
+- **Contenedorizador**: Docker
+- **Deployment**: Vercel
+- **Documentación**: Swagger
