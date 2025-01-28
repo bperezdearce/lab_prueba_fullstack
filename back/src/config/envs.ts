@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-export const PORT = process.env.PORT || 2000;
+export const PORT = process.env.PORT;
 
 export const DATABASE_URL = process.env.DATABASE_URL || undefined;
 export const DB_HOST = process.env.DB_HOST || "localhost";
