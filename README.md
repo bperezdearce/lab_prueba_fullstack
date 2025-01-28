@@ -6,124 +6,110 @@ Esta aplicación fue desarrollada con la finalidad de **listar y visualizar info
 - Cuenta con un **backend** que expone una API REST para consultar dicha información.
 - Provee un **frontend** para mostrar de manera amigable los datos de los sets y sus cartas asociadas.
 
-## Instalación y Ejecución en Entorno Local (Sin Docker)
+---
+
+## Requisitos de Desarrollo
+
+- **Docker** (para levantar el backend y la base de datos en contenedores).
+- **Node.js** (para correr el frontend localmente).
+
+> **Nota**: Si deseas correr el backend sin Docker, necesitarías cambiar la variable `DB_HOST` y levantar tu propia instancia de PostgreSQL local o en la nube.
+
+---
+
+## Instalación y Ejecución
 
 ### 1. Clonar el repositorio
 
 `git clone <URL_DE_TU_REPOSITORIO> cd LAB_PRUEBA_FULLSTACK`
 
-### 2. Variables de Entorno
+### 2. Configurar las Variables de Entorno
 
-Asegúrate de configurar correctamente tus variables de entorno en el archivo `.env` (o usar `.env.example` como plantilla) tanto en el backend como en el root del proyecto, si corresponde.
+Asegúrate de configurar los valores adecuados en `.env` (puedes basarte en `.env.example`).
 
-- Para el **backend** necesitarás valores como `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, etc.
-- Para el **frontend**, puede que requieras la URL del backend (`NEXT_PUBLIC_API_URL`, por ejemplo).
+- Para el **backend** (dentro de la carpeta `back`), las variables típicas son `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, etc.
+    - En el archivo `docker-compose.yml`, el servicio de la base de datos se suele llamar `postgres` o `db`. Ajusta `DB_HOST` a ese nombre para que el backend se conecte correctamente.
+- Para el **frontend** (en la carpeta `front`), podrías necesitar `NEXT_PUBLIC_API_URL` con la URL donde se exponga el backend.
 
-### 3. Instalación de dependencias
+### 3. Levantar Backend y Base de Datos con Docker
 
-#### 3.1. Backend
+Desde la carpeta raíz del proyecto (donde está el `docker-compose.yml`):
 
-`cd back npm install`
+`docker-compose up -d`
 
-- Aquí se instalan las dependencias de Node y TypeScript para el backend.
+Esto iniciará:
 
-#### 3.2. Frontend
+- Un contenedor de **PostgreSQL**.
+- El contenedor del **backend** en Node.js.
 
-`cd ../front npm install`
+Para verificar que ambos contenedores estén corriendo, usa:
 
-- Se instalan las dependencias de Next.js y TailwindCSS para el frontend.
+`docker-compose ps`
 
-### 4. Ejecución local
+### 4. Levantar el Frontend en Local
 
-#### 4.1. Backend
+El frontend **no** está en Docker en esta configuración, así que debes correrlo localmente:
 
-Dentro de la carpeta `back`:
+`cd front npm install   # solo la primera vez npm run dev   # modo desarrollo`
 
-- **Desarrollo (hot reload con nodemon)**
-    
-    `npm run dev`
-    
-- **Build y ejecución**
-    
-    `npm run build npm run start`
-    
-    Esto compila el proyecto a JavaScript en `dist/` y luego levanta el servidor en Node.
-
-#### 4.2. Frontend
-
-Dentro de la carpeta `front`:
-
-- **Desarrollo**
-    
-    `npm run dev`
-    
-- **Build y ejecución**
-    
-    `npm run build npm run start`
-    
-    Con esto se crea la carpeta `.next/` y luego se levanta la aplicación Next.js en modo producción.
+El servidor de Next.js iniciará, normalmente en http://localhost:3000.
 
 ---
 
-## Ejecución con Docker (Desarrollo)
+## Despliegue
 
-Esta parte es opcional y se usa solo en **entornos de desarrollo**, si prefieres aislar la base de datos y/o la aplicación en contenedores. El archivo `docker-compose.yml` provee un contenedor de **PostgreSQL** y, opcionalmente, para **backend** y **frontend**.
+### Backend en Render
 
-1. **Configurar `.env`** apropiadamente para apuntar a los contenedores (p. ej. `DB_HOST=db` si el servicio se llama `db` en el `docker-compose.yml`).
-2. **Levantar contenedores**:
+1. **Variables de entorno**
     
-    `docker-compose up -d`
+    - Configura en [Render](https://render.com/) las mismas variables del backend (`DB_HOST`, `DB_USER`, etc.).
+    - Si la base de datos también está en Render, usa la URL/puerto que te provea.
+2. **Comandos de Build y Start**
     
-3. Verifica que los contenedores estén corriendo con:
+    - _Build Command_: `npm run build`
+    - _Start Command_: `npm run start`
+3. **URL del Backend**
     
-    `docker-compose ps`
+    - Render te proporcionará un dominio como `https://tu-backend.onrender.com/`.
+    - Usa esa URL en el frontend (`NEXT_PUBLIC_API_URL`).
+
+### Frontend en Vercel
+
+1. **Variables de entorno**
+    
+    - Configura `NEXT_PUBLIC_API_URL` apuntando a la URL de tu backend en Render.
+2. **Build Command**
+    
+    - `npm run build` (Vercel ejecuta Next.js en modo serverless).
+3. **URL del Frontend**
+    
+    - Vercel proveerá una URL tipo `https://tu-frontend.vercel.app/`.
 
 ---
-
-## Despliegue en Render
-
-Para producción, la aplicación está desplegada en [Render](https://render.com/). Solo se despliega el **backend** (Node) y el **frontend** (Next.js) como servicios separados (o un único servicio fullstack, dependiendo de tu setup).
-
-1. **Variables de entorno**:
-    
-    - Configura en el panel de Render las mismas variables de entorno que usas localmente (`DB_HOST`, `DB_USER`, `DB_PASSWORD`, etc.).
-    - Render te permite administrar variables de entorno de forma segura desde su dashboard.
-2. **Base de datos**:
-    
-    - Si usas la base de datos de Render, asigna la URL/host/puerto que Render te proporciona para `DB_HOST`, `DB_PORT`, etc.
-    - Si usas la base de datos en Docker (local) únicamente para desarrollo, entonces en Render apuntas a otra instancia de PostgreSQL en la nube.
-3. **Build & Start Commands**:
-    
-    - **Backend**:
-        - _Build Command_: `npm run build`
-        - _Start Command_: `npm run start`
-    - **Frontend**:
-        - _Build Command_: `npm run build`
-        - _Start Command_: `npm run start`
-4. **Enlaces de despliegue**
-    
-    - Cada servicio en Render tendrá su propia URL pública.
-    - Si el frontend consume el backend, asegúrate de actualizar la variable `NEXT_PUBLIC_API_URL` (o similar) para apuntar a la URL del backend en Render.
 
 ## Endpoints de la API
-
-El backend provee los siguientes endpoints para consultar la información de los sets y las cartas de Pokémon TCG:
 
 - **`GET /sets`**  
     Retorna todos los sets disponibles.
     
 - **`GET /sets/:id/cards`**  
-    Retorna todas las cartas asociadas al set con el ID especificado.
+    Retorna todas las cartas de un set específico.
     
 - **`GET /cards/:id`** _(opcional)_  
-    Retorna la información detallada de una carta específica, incluyendo imágenes y datos de mercado.
+    Retorna información detallada de una carta, incluyendo imágenes y datos de mercado.
     
 
 ### Documentación con Swagger
 
-La API cuenta con documentación generada automáticamente por **Swagger**. Para acceder a ella localmente (después de levantar el servidor), ve a la ruta donde la hayas configurado.  
-Por ejemplo:
+La API cuenta con documentación generada por **Swagger**. Para verla (en local) tras levantar el contenedor, visita:
 
-`http://localhost:3001/api-docs`
+`http://localhost:<PUERTO_BACKEND>/api-docs`
 
-De esta manera, podrás explorar todos los endpoints disponibles, revisar sus parámetros y ver ejemplos de respuestas.
+(El puerto varía según tu configuración.)
+
+---
+
+### ¡Listo!
+
+- **Modo desarrollo**: Usa `docker-compose` para levantar el backend y la base de datos, y luego `npm run dev` en `front`.
+- **Despliegue**: Se realiza con **Render** para el backend y **Vercel** para el frontend, configurando las variables de entorno en cada plataforma.

@@ -2,6 +2,7 @@
   "name": "pokemontcg-back",
   "version": "1.0.0",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "build:start": "tsc && node ./dist/index.js",
