@@ -1,10 +1,11 @@
+// @ts-ignore
 import swaggerJSDoc from "swagger-jsdoc";
 
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "POcKETCG",
+      title: "POCKETCG",
       version: "1.0.0",
       description: "API para gestionar sets y cartas de Pokémon TCG",
     },
@@ -20,8 +21,8 @@ const swaggerOptions = {
     ],
     servers: [
       {
-        url: "http://localhost:2000",
-        description: "Servidor local",
+        url: process.env.SWAGGER_SERVER || "http://localhost:2000",
+        description: process.env.NODE_ENV === "production" ? "Servidor en Render" : "Servidor local",
       },
     ],
     components: {
