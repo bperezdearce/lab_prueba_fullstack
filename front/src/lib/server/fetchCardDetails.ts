@@ -1,8 +1,10 @@
 import { ICard } from "@/interfaces/interfaces";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 async function fetchCardDetails(id: string): Promise<ICard> {
   try {
-    const response = await fetch(`http://localhost:2000/cards/${id}`);
+    const response = await fetch(`${apiUrl}/cards/${id}`);
     if (!response.ok) {
       throw new Error(`Error HTTP! status: ${response.status}`);
     }

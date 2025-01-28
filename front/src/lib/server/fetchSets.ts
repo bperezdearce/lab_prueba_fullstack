@@ -1,8 +1,10 @@
 import { ISet } from "@/interfaces/interfaces";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 async function fetchSets(): Promise<ISet[]> {
   try {
-    const response = await fetch("http://localhost:2000/sets");
+    const response = await fetch(`${apiUrl}/sets`);
     if (!response.ok) {
       throw new Error(`Error HTTP! status: ${response.status}`);
     }
