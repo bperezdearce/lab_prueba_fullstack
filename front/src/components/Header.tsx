@@ -9,7 +9,7 @@ const Header = () => {
     <header className="py-8 xl:py-12 text-white">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/">
-          <h1 className="text-4xl text-accent-default hover:text-accent-hover font-semibold transition-all flex items-center gap-2">
+          <h1 className="text-4xl text-accent-default hover:text-accent-hover font-semibold transform transition-all flex items-center gap-2">
             POcKETCG <span className="text-terciary"><TbPokeball /></span>
           </h1>
         </Link>

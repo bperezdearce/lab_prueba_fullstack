@@ -4,7 +4,6 @@ import * as React from "react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { IoMdClose } from "react-icons/io"
 
 const Sheet = SheetPrimitive.Root
 const SheetTrigger = SheetPrimitive.Trigger
@@ -67,14 +66,6 @@ const SheetContent = React.forwardRef<
       
       {children}
 
-      {/* Botón de cierre opcional */}
-      <SheetClose asChild>
-        <button
-          className="absolute top-4 right-4 rounded-full p-1 hover:bg-gray-200 dark:hover:bg-gray-700"
-        >
-          <IoMdClose className="w-6 h-6" />
-        </button>
-      </SheetClose>
     </SheetPrimitive.Content>
   </SheetPortal>
 ))

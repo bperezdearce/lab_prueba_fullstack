@@ -20,10 +20,6 @@ const links = [
     name: "sets",
     path: "/sets",
   },
-  {
-    name: "about",
-    path: "/about",
-  },
 ];
 
 const MobileNavbar = () => {
@@ -49,8 +45,8 @@ const MobileNavbar = () => {
                   href={link.path}
                   className={`${
                     link.path === pathname &&
-                    "text-accent-default border-b-2 border-accent-default"
-                  } text-xl hover:text-accent-hover transition-all`}
+                    "text-secondary b-2"
+                  } text-xl hover:text-accent-default transform transition-all`}
                   type="submit"
                 >
                   {link.name}

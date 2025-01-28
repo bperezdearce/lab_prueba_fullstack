@@ -1,0 +1,44 @@
+name: poketcg-app
+services:
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - ./back/.env
+    ports:
+      - "2000:2000"
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./back:/usr/src
+      - /usr/src/node_modules
+    command: npm run dev 
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

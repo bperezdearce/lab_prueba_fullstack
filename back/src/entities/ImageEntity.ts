@@ -11,6 +11,9 @@ export class Image {
   card!: Card;
 
   @Column()
+  card_id!: string;
+
+  @Column()
   url!: string;
 
   @Column()

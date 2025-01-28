@@ -6,11 +6,10 @@ export const getCardDetailsController = async (
   res: Response
 ) => {
   const { id } = req.params;
-  console.log("Id de la carta:", id);
   try {
     const card = await getCardDetailsService(id);
     res.status(200).json(card);
   } catch (error) {
-    res.status(404).json({ message: "Carta no encontrada" });
+    res.status(400).json({ message: "Error al conseguir el detalle de la carta" });
   } 
 };

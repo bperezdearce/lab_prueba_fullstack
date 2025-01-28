@@ -23,12 +23,12 @@ export default {
 	},
   	extend: {
   		colors: {
-  			primary: "#020202",
-			secondary: "#2B4693",
-			terciary: "#F11B29",
+  			primary: "#181818",
+			secondary: "#0E50D2",
+			terciary: "#F70000",
 			accent: {
-				default: "#FCBF17",
-				hover: "#C79C05"
+				default: "#F6B30D",
+				hover: "#D9980B"
 			}
   		},
   		borderRadius: {

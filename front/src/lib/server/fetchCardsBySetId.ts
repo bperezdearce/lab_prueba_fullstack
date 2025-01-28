@@ -2,7 +2,7 @@ import { ICard } from "@/interfaces/interfaces";
 
 async function fetchCardsBySetId(id: string): Promise<ICard[]> {
   try {
-    const response = await fetch(`http://localhost:2000/sets/${id}`);
+    const response = await fetch(`http://localhost:2000/sets/${id}/cards`);
     if (!response.ok) {
       throw new Error(`Error HTTP! status: ${response.status}`);
     }

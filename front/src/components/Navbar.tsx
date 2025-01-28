@@ -12,10 +12,6 @@ const links = [
     name: "sets",
     path: "/sets",
   },
-  {
-    name: "about",
-    path: "/about",
-  },
 ];
 
 const Navbar = () => {
@@ -31,7 +27,7 @@ const Navbar = () => {
             className={`${
               link.path === pathname &&
               "text-secondary border-b-2 border-secondary"
-            } font-medium hover:text-secondary transition-all`}
+            } font-medium hover:text-secondary transform transition-all`}
           >
             {link.name}
           </Link>
