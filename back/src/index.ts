@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import { PORT } from "./config/envs";
 import { AppDataSource } from "./config/data-source";
+import { PORT } from "./config/envs";
 import server from "./server";
 
 AppDataSource.initialize()
