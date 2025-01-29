@@ -1,14 +1,19 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "images.pokemontcg.io",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'images.pokemontcg.io',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
-};
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
+}
 
-export default nextConfig;
+module.exports = nextConfig
