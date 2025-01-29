@@ -1,4 +1,4 @@
-# Pokémon TCG - Sets y Cartas (Escarlata y Púrpura)
+# ✳ Pokémon TCG - Sets y Cartas (Escarlata y Púrpura) ✳
 
 Esta aplicación fue desarrollada con la finalidad de **listar y visualizar información** sobre los **sets** y **cartas** de la serie **Escarlata y Púrpura** del juego Pokémon TCG.
 
